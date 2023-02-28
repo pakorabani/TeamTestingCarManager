@@ -91,9 +91,11 @@ namespace CarManager.Tests
                 //TO DO
             }
 
-           
-            [TestCase] //всички случаи, при които се хвърля изключение
-            //TO DO
+            [TestCase(null, "Golf", 30, 55)]
+            [TestCase("Volkswagen", null, 35, 60)]
+            [TestCase("Volkswagen", "Golf", -30, 50)]
+            [TestCase("Volkswagen", "Golf", 45, -55)]
+
             public void ValidateAllProperties(string make, string model, double fuelConsumption, double fuelCapacity)
             {
                 //TO DO
