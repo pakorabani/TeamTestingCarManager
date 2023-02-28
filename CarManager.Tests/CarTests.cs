@@ -63,7 +63,7 @@ namespace CarManager.Tests
             public void FuelConsumptionShouldThrowArgExWhenIsZero()
             {
             string make = "aaa";
-            string model = null;
+            string model = "bbb";
             double fuelConsumption = 0;
             double fuelCapacity = 40;
 
