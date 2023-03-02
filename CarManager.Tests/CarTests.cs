@@ -102,14 +102,19 @@ namespace CarManager.Tests
             }
 
             [TestCase(null, "Golf", 30, 55)]
+            [TestCase("", "Golf", 30, 55)]
             [TestCase("Volkswagen", null, 35, 60)]
+            [TestCase("Volkswagen", "", 35, 60)]
+            [TestCase("Volkswagen", "Golf", 0, 50)]
             [TestCase("Volkswagen", "Golf", -30, 50)]
             [TestCase("Volkswagen", "Golf", 45, -55)]
+            [TestCase("Volkswagen", "Golf", 45, 0)]
 
-            public void ValidateAllProperties(string make, string model, double fuelConsumption, double fuelCapacity)
-            {
-                //TO DO
-            }
+             public void ValidateAllProperties(string make, string model, double fuelConsumption, double fuelCapacity)
+             {
+
+                Assert.Throws<ArgumentException>(() => new Car(make, model, fuelConsumption, fuelCapacity));
+             }
 
 
             [Test]
@@ -142,17 +147,27 @@ namespace CarManager.Tests
             }
 
             [Test]
-            //TO DO
-            public void ShouldRefuelThrowArgExWhenInputAmountIsBellowZero(double inputAmount)
+            public void ShouldRefuelThrowArgExWhenInputAmountIsBellowZero()
             {
-                //TO DO
+                string make = "aaa";
+                string model = "bbb";
+                double fuelConsumption = 5;
+                double fuelCapacity = 100;
+                double fuelToRefuel = -3;
+
+                Car newCar = new Car(make, model, fuelConsumption, fuelCapacity);
+                var ex = Assert.Throws<ArgumentException>(() => newCar.Refuel(fuelToRefuel));
+                Assert.AreEqual("Fuel amount cannot be zero or negative!", ex.Message);
             }
 
             [Test]
             public void ShouldDriveNormally()
             {
                 Car car = new Car("Vw", "Golf", 2, 100);
-                //TO DO
+                double distance = 10;
+
+                var ex = Assert.Throws<InvalidOperationException>(() => car.Drive(distance));
+                Assert.AreEqual("You don't have enough fuel to drive!", ex.Message);
             }
 
             [Test]
@@ -165,6 +180,6 @@ namespace CarManager.Tests
             double distance = 20;
             Car car = new Car(make, model, fuelConsumption, fuelCapacity);
             Assert.Throws<InvalidOperationException>(() => car.Drive(distance));
-        }
-        }
+            }
+    }
 }
