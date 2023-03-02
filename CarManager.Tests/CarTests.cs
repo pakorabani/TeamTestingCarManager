@@ -164,10 +164,11 @@ namespace CarManager.Tests
             public void ShouldDriveNormally()
             {
                 Car car = new Car("Vw", "Golf", 2, 100);
-                double distance = 10;
-
-                var ex = Assert.Throws<InvalidOperationException>(() => car.Drive(distance));
-                Assert.AreEqual("You don't have enough fuel to drive!", ex.Message);
+                double distance = 100;
+                
+                car.Refuel(100);
+                car.Drive(distance);
+                Assert.AreEqual(98,car.FuelAmount);
             }
 
             [Test]
@@ -177,9 +178,11 @@ namespace CarManager.Tests
             string model = "bbb";
             double fuelConsumption = 5;
             double fuelCapacity = 40;
-            double distance = 20;
+
             Car car = new Car(make, model, fuelConsumption, fuelCapacity);
-            Assert.Throws<InvalidOperationException>(() => car.Drive(distance));
+            
+            car.Refuel(1);
+            Assert.Throws<InvalidOperationException>(() => car.Drive(200));
             }
     }
 }
