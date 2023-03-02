@@ -142,7 +142,7 @@ namespace CarManager.Tests
             [Test]
             public void DriveShouldThrowInvalidOperationExceptionWhenFuelAmountIsNotEnough()
             {
-            string make = "aaa";
+            string make = "aaaa";
             string model = "bbb";
             double fuelConsumption = 5;
             double fuelCapacity = 40;
