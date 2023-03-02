@@ -108,9 +108,16 @@ namespace CarManager.Tests
             [Test]
             public void ShouldRefuelNormally()
             {
-
-                //TO DO
-            }
+            string make = "aaa";
+            string model = "bbb";
+            double fuelConsumption = 5;
+            double fuelCapacity = 40;
+            double fuelToRefuel = 7;
+            
+            Car car = new Car(make, model, fuelConsumption, fuelCapacity);
+            car.Refuel(fuelToRefuel);
+            Assert.AreEqual(fuelToRefuel, car.FuelAmount);
+        }
 
             [Test]
             public void ShouldRefuelUntillTotalFuelCapacity()
@@ -135,8 +142,14 @@ namespace CarManager.Tests
             [Test]
             public void DriveShouldThrowInvalidOperationExceptionWhenFuelAmountIsNotEnough()
             {
-                //TO DO
-            }
+            string make = "aaa";
+            string model = "bbb";
+            double fuelConsumption = 5;
+            double fuelCapacity = 40;
+            double distance = 20;
+            Car car = new Car(make, model, fuelConsumption, fuelCapacity);
+            Assert.Throws<InvalidOperationException>(() => car.Drive(distance));
+        }
         }
 
     }
